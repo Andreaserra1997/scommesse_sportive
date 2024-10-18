@@ -1,91 +1,92 @@
-# Scommesse Sportive
+# Sports Betting
 
-Sviluppato da **Andrea Serra**
+Developed by **Andrea Serra**
 
-## Installazione
+## Installation
 
-Per eseguire questa applicazione localmente, assicurati di avere i seguenti prerequisiti installati:
+To run this application locally, make sure you have the following prerequisites installed:
 
-- Java 17 o superiore
+- Java 17 or higher
 - Maven
-- MySQL (o un altro database relazionale supportato)
+- MySQL (or another supported relational database)
 
-Esegui il download del repository tramite questo link:
+Download the repository by this link:
 
 ```
 https://github.com/Andreaserra1997/scommesse_sportive
 ```
 
-Configura il database e aggiorna **application.properties** con le tue credenziali MySQL:
+Configure the database and update **application.properties** with your MySQL credentials:
 
 ```
 #data source
-spring.datasource.url=jdbc:mysql://localhost:3306/{nome del tuo database}
+spring.datasource.url=jdbc:mysql://localhost:3306/{name of your database}
 spring.datasource.username={username}
 spring.datasource.password={password}
 ```
 
-**Avvia l'applicazione**
+**Start the application**
 
 <br>
 
-## Panoramica
+## Overview
 
-L'API Bet è un servizio web RESTful progettato per gestire eventi sportivi e le relative scommesse. L'applicazione
-fornisce un set di endpoint per creare, visualizzare, aggiornare e cancellare eventi sportivi e scommesse, permettendo
-una gestione completa del ciclo di vita delle scommesse.
+The Bet API is a RESTful web service designed to manage sporting events and related betting. The application
+provides a set of endpoints to create, view, update, and delete sporting events and bets, enabling
+comprehensive management of the betting lifecycle.
 
-## Funzionalità principali
+## Key features
 
-### Eventi
+### Events
 
-L'applicazione consente di gestire eventi sportivi. Ogni evento è identificato da un ID univoco e include dettagli come:
+The application allows you to manage sports events. Each event is identified by a unique ID and includes details such
+as:
 
 <ul>
-<li><strong>Nome dell'evento</strong>: il nome della partita o della competizione.</li>
-<li><strong>Data e ora:</strong> quando si svolgerà l'evento.</li>
-<li><strong>Quote:</strong> le probabilità iniziali associate all'evento, utili per calcolare il valore delle scommesse.</li>
+<li><strong>Event Name</strong>: the name of the game or competition.</li>
+<li><strong>Date and time:</strong> when the event will take place.</li>
+<li><strong>Quotes:</strong> the initial odds associated with the event, useful for calculating the value of bets.</li>
 </ul>
 
-Gli eventi rappresentano il contesto principale delle scommesse, e una volta creato un evento, gli utenti possono
-associare scommesse a esso. È possibile aggiornare le informazioni sugli eventi e cancellarli quando non sono più
-necessari.
+Events represent the main betting context, and once an event is created, users can
+associate bets with it. It is possible to update information on events and delete them when they are no longer
+needed.
 
-### Scommesse
+### Betting
 
-Gli utenti possono creare scommesse sugli eventi sportivi esistenti. Ogni scommessa è associata a un evento specifico
-tramite una relazione <strong>uno-a-molti</strong>:
+Users can create bets on existing sporting events. Each bet is associated with a specific event through a one-to-many
+relationship :
 
 <ul>
-<li>Un <strong>evento</strong> può avere più <strong>scommesse</strong> (relazione uno-a-molti).</li>
-<li>Ogni <strong>scommessa</strong> è legata a un singolo <strong>evento</strong> (chiave esterna).</li>
+<li>A <strong>event</strong> can have multiple <strong>bets</strong> (one-to-many relationship).</li>
+<li>Each <strong>bet</strong> is linked to a single <strong>event</strong> (foreign key).</li>
 </ul>
 
-Le scommesse contengono le seguenti informazioni:
+The bets contain the following information:
 
 <ul>
-<li><strong>Tipo di scommessa:</strong> definisce il risultato su cui si sta scommettendo (es. vittoria di una squadra, pareggio).</li>
-<li><strong>Importo:</strong> la somma di denaro scommessa.</li>
+<li><strong>Type of bet:</strong> defines the outcome you are betting on (e.g., team win, draw).</li>
+<li><strong>Amount:</strong> the amount of money wagered.</li>
 </ul>
 
 <br>
 
 ## API Endpoints
 
-### 1. Eventi Sportivi
+### 1. Sports Events
 
-### Descrizione: Recupera tutti gli eventi sportivi.
+### Description: Retrieves all sports events.
 
-**Esempio di utilizzo in Postman:**
+**Example of use in Postman:**
 
 <ol>
-<li>Crea una nuova richiesta</li>
-<li>Seleziona il metodo <strong>GET</strong></li>
-<li>Inserisci l'URL: <strong>http://localhost:8080/api/events</strong></li>
-<li>Clicca su <strong>SEND</strong></li>
+<li>Create a new request</li>
+<li>Select the method <strong>GET</strong></li>
+<li>Enter the URL: <strong>http://localhost:8080/api/events</strong></li>
+<li>Click on <strong>SEND</strong></li>
 </ol>
 
-**Risposta**
+**Answer**
 
 ```
 [
@@ -102,23 +103,23 @@ Le scommesse contengono le seguenti informazioni:
 ]
 ```
 
-### Descrizione: Crea un nuovo evento sportivo.
+### Description: Create a new sports event.
 
-**Esempio di utilizzo in Postman:**
+**Example of use in Postman:**
 
 <ol>
-<li>Crea una nuova richiesta</li>
-<li>Seleziona il metodo <strong>POST</strong></li>
-<li>Inserisci l'URL: <strong>http://localhost:8080/api/events</strong></li>
+<li>Create a new request</li>
+<li>Select the method <strong>POST</strong></li> 
+<li>Enter the URL: <strong>http://localhost:8080/api/events</strong></li>
 <li>
-<strong>Imposta l'header:</strong> Assicurarsi di specificare il tipo di contenuto della richiesta per fare in modo che Spring Boot interpreti correttamente il payload
+<strong>Set the header:</strong> Be sure to specify the content type of the request to make Spring Boot interpret the payload correctly
 <ul>
 <li>Key: <strong>Content-Type</strong></li>
 <li>Value: <strong>application/json</strong></li>
 </ul>
 </li>
-<li>Vai alla sezione <strong>Body</strong>, seleziona <strong>raw</strong>, e imposta il tipo su <strong>JSON</strong></li>
-<li>Inserisci il seguente <strong>JSON:</strong></li>
+<li>Go to the <strong>Body</strong> section, select <strong>raw</strong>, and set the type to <strong>JSON</strong></li>
+<li>Enter the following <strong>JSON:</strong></li>
 
 ```
 {
@@ -132,26 +133,26 @@ Le scommesse contengono le seguenti informazioni:
 }
 ```
 
-<li>Clicca su <strong>SEND</strong></li>
+<li>Click on <strong>SEND</strong></li>
 </ol>
 
-### Descrizione: Aggiorna i dettagli di un evento sportivo esistente identificato dall'ID.
+### Description: Updates the details of an existing sports event identified by the ID.
 
-**Esempio di utilizzo in Postman:**
+**Example of use in Postman:**
 
 <ol>
-<li>Crea una nuova richiesta</li>
-<li>Seleziona il metodo <strong>PUT</strong></li>
-<li>Inserisci l'URL: <strong>http://localhost:8080/api/events/{id}</strong></li>
+<li>Create a new request</li>
+<li>Select the method <strong>PUT</strong></li>
+<li>Enter the URL: <strong>http://localhost:8080/api/events/{id}</strong></li>
 <li>
-<strong>Imposta l'header:</strong> Assicurarsi di specificare il tipo di contenuto della richiesta per fare in modo che Spring Boot interpreti correttamente il payload
+<strong>Set the header:</strong> Be sure to specify the content type of the request to make Spring Boot correctly interpret the payload
 <ul>
 <li>Key: <strong>Content-Type</strong></li>
 <li>Value: <strong>application/json</strong></li>
 </ul>
 </li>
-<li>Vai alla sezione <strong>Body</strong>, seleziona <strong>raw</strong>, e imposta il tipo su <strong>JSON</strong></li>
-<li>Inserisci il seguente <strong>JSON:</strong></li>
+<li>Go to the <strong>Body</strong> section, select <strong>raw</strong>, and set the type to <strong>JSON</strong></li>
+<li>Enter the following <strong>JSON:</strong></li>
 
 ```
 {
@@ -165,45 +166,45 @@ Le scommesse contengono le seguenti informazioni:
 }
 ```
 
-<li>Clicca su <strong>SEND</strong></li>
+<li>Click on <strong>SEND</strong></li>
 </ol>
 
-### Descrizione: Cancella un evento specifico identificato dal suo ID.
+### Description: Deletes a specific event identified by its ID.
 
-**Esempio di utilizzo in Postman:**
+**Example of use in Postman:**
 
 <ol>
-<li>Crea una nuova richiesta</li>
-<li>Seleziona il metodo <strong>DELETE</strong></li>
-<li>Inserisci l'URL: <strong>http://localhost:8080/api/events/2 (dove 2 è l'ID dell'evento da cancellare)</strong></li>
-<li>Clicca su <strong>SEND</strong></li>
+<li>Creates a new request</li>
+<li>Select the method <strong>DELETE</strong></li>
+<li>Enter the URL: <strong>http://localhost:8080/api/events/2 (where 2 is the ID of the event to be deleted)</strong></li>
+<li>Click on <strong>SEND</strong></li>
 </ol>
 
-### Descrizione: Visualizza un singolo evento sportivo tramite l'ID.
+### Description: View a single sporting event by ID.
 
-**Esempio di utilizzo in Postman:**
+**Example of use in Postman:**
 
 <ol>
-<li>Crea una nuova richiesta</li>
-<li>Seleziona il metodo <strong>GET</strong></li>
-<li>Inserisci l'URL: <strong>http://localhost:8080/api/events/{id}</strong></li>
-<li>Clicca su <strong>SEND</strong></li>
+<li>Create a new request</li>
+<li>Select the method <strong>GET</strong></li>
+<li>Enter the URL: <strong>http://localhost:8080/api/events/{id}</strong></li>
+<li>Click on <strong>SEND</strong></li>
 </ol>
 
-### 2. Scommesse
+### 2. Bets
 
-### Descrizione: Recupera tutte le scommesse per uno specifico evento sportivo.
+### Description: Retrieves all bets for a specific sporting event.
 
-**Esempio di utilizzo in Postman:**
+**Example of use in Postman:**
 
 <ol>
-<li>Crea una nuova richiesta</li>
-<li>Seleziona il metodo <strong>GET</strong></li>
-<li>Inserisci l'URL: <strong>http://localhost:8080/api/bets?eventId=1</strong></li>
-<li>Clicca su <strong>SEND</strong></li>
+<li>Create a new request</li>
+<li>Select the method <strong>GET</strong></li>
+<li>Enter the URL: <strong>http://localhost:8080/api/bets?eventId=1</strong></li>
+<li>Click on <strong>SEND</strong></li>
 </ol>
 
-**Risposta**
+**Answer**
 
 ```
 [
@@ -222,23 +223,23 @@ Le scommesse contengono le seguenti informazioni:
 ]
 ```
 
-### Descrizione: Crea una nuova scommessa per un evento.
+### Description: Creates a new bet for an event.
 
-**Esempio di utilizzo in Postman:**
+**Example of use in Postman:**
 
 <ol>
-<li>Crea una nuova richiesta</li>
-<li>Seleziona il metodo <strong>POST</strong></li>
-<li>Inserisci l'URL: <strong>http://localhost:8080/api/bets</strong></li>
+<li>Create a new request</li>
+<li>Select the method <strong>POST</strong></li>
+<li>Enter the URL: <strong>http://localhost:8080/api/bets</strong></li>
 <li>
-<strong>Imposta l'header:</strong> Assicurarsi di specificare il tipo di contenuto della richiesta per fare in modo che Spring Boot interpreti correttamente il payload
+<strong>Set the header:</strong> Be sure to specify the content type of the request to make Spring Boot interpret the payload correctly
 <ul>
 <li>Key: <strong>Content-Type</strong></li>
 <li>Value: <strong>application/json</strong></li>
 </ul>
 </li>
-<li>Vai alla sezione <strong>Body</strong>, seleziona <strong>raw</strong>, e imposta il tipo su <strong>JSON</strong></li>
-<li>Inserisci il seguente <strong>JSON:</strong></li>
+<li>Go to the <strong>Body</strong> section, select <strong>raw</strong>, and set the type to <strong>JSON</strong></li>
+<li>Enter the following <strong>JSON:</strong></li>
 
 ```
 {
@@ -249,18 +250,18 @@ Le scommesse contengono le seguenti informazioni:
 
 ```
 
-<li>Clicca su <strong>SEND</strong></li>
+<li>Click on <strong>SEND</strong></li>
 </ol>
 
-### Descrizione: Cancella una scommessa specifica identificata dal suo ID.
+### Description: Deletes a specific bet identified by its ID.
 
-**Esempio di utilizzo in Postman:**
+**Example of use in Postman:**
 
 <ol>
-<li>Crea una nuova richiesta</li>
-<li>Seleziona il metodo <strong>DELETE</strong></li>
-<li>Inserisci l'URL: <strong>http://localhost:8080/api/bets/2 (dove 2 è l'ID della scommessa da cancellare)</strong></li>
-<li>Clicca su <strong>SEND</strong></li>
+<li>Create a new request</li>
+<li>Select the method <strong>DELETE</strong></li>
+<li>Enter the URL: <strong>http://localhost:8080/api/bets/2 (where 2 is the ID of the bet to be deleted)</strong></li>
+<li>Click on <strong>SEND</strong></li>
 </ol>
 
 <br>
