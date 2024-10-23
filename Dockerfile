@@ -12,4 +12,4 @@ RUN mvn clean package
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "target/SpringLibraryApplication"]
+CMD ["java", "-cp", "target/classes/com/SpringLibraryApplication"]
