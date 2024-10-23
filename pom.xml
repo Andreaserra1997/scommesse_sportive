@@ -72,6 +72,13 @@
             <artifactId>maven-core</artifactId>
             <version>4.0.0-alpha-13</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugin-tools/maven-plugin-annotations -->
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>3.15.0</version>
+            <scope>provided</scope>
+        </dependency>
 
 
     </dependencies>
