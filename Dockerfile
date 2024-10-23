@@ -8,9 +8,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN mvn clean install || true
+RUN mvn clean install
 
 
 EXPOSE 8080
 
-CMD ["java", "-cp", "src/main/java/com/bet/springlibrary", "SpringLibraryApplication.java"]
+CMD ["java", "-cp", "target/classes", "com.SpringLibraryApplication.class"]
