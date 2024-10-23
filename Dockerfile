@@ -8,7 +8,6 @@ WORKDIR /app
 
 COPY . .
 
-
 EXPOSE 8080
 
-CMD ["java", "-cp", "target/classes", "com.SpringLibraryApplication.class"]
+CMD ["java", "-cp", "target/classes/com/SpringLibraryApplication.class"]
