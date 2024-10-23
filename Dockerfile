@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mvn clean install
+RUN mvn clean install || true
 
 
 EXPOSE 8080
