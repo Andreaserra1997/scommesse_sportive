@@ -1,13 +1,16 @@
-FROM maven:3.8.5-openjdk-17 AS build
+FROM openjdk:17-jdk-slim
+
+RUN apt-get update && \
+    apt-get install -y maven && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
 
 COPY . .
 
-RUN mvn clean package -DskipTests
+RUN mvn clean install
 
-FROM openjdk:17.0.1-jdk-slim
-
-COPY --from=build /target/classes/com/SpringLibraryApplication.class SpringLibraryApplication.class
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-cp", "target/classes", "com.SpringLibraryApplication.class"]
+CMD ["java", "-cp", "target/classes", "com.SpringLibraryApplication.class"]
